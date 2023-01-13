@@ -1,0 +1,46 @@
+clc
+clear 
+image = load('cameraman.tif');
+image_array = image_array(:);
+image_array = (image_array-128)/128;
+
+
+x   = randn(10000,1);
+f1  = 0.9;
+b   = 1;
+f   = [1;f1];
+
+data = filter(b,f,x);
+%[data,fs] = audioread('speech.wav');
+
+
+[a1,b1,c1,d1,e1] = Lloyd_max(data,2,min(data),max(data));
+[a2,b2,c2,d2,e2] = Lloyd_max(data,4,min(data),max(data));
+[a3,b3,c3,d3,e3] = Lloyd_max(data,8,min(data),max(data));
+
+[a4,b4,c4,d4,e4] = Lloyd_max(image_array,2,min(image_array),max(image_array));
+[a5,b5,c5,d5,e5] = Lloyd_max(image_array,4,min(image_array),max(image_array));
+
+a4 = 128*a4+128;
+image_a4 = reshape(a4,256,256);
+
+a5 = 128*a5+128;
+image_a5 = reshape(a5,256,256);
+
+
+figure(1)
+plot(data)
+figure(2)
+plot(a1)
+figure(3)
+plot(a2)
+figure(4)
+plot(a3)
+
+figure(5)
+imshow(uint8(image))
+figure(6)
+imshow(uint8(image_a4))
+figure(7)
+imshow(uint8(image_a5))
+

@@ -1,11 +1,6 @@
-K = 1.5;
-DELTA_INIT = 1;
-
-in = audioread("speech.wav");
-encoded = adm_encoder(in, 2);
-decoded = adm_decoder(encoded, 2);
-
 function [y] = adm_encoder(x, M)
+    K = 1.5;
+    DELTA_INIT = 1;
     x = interp(x, M);
     y = zeros(size(x));
     delta = zeros(size(x));
@@ -42,26 +37,3 @@ function [y] = adm_encoder(x, M)
     end
 end
 
-function [y] = adm_decoder(b, N)  
-    y = zeros([size(b) 1]);
-       
-    delta = zeros(size(b));
-    delta(1) = 0.1;
-    
-    y(1) = delta(1);
-    if b(1) == -1
-        y(1) = -delta(1);
-    end
-        
-    for n = 2:(size(b))
-        delta(n) = delta(n-1) * 1.5;
-
-        if b(n) ~= b(n-1)
-            delta(n) = delta(n-1) / 1.5;
-        end
-        
-        y(n) = b(n) * delta(n) + y(n-1);
-    end
-    
-    y = y(1:N:end);
-end
