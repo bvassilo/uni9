@@ -35,8 +35,10 @@ image_a7 = reshape(a7,256,256);
 a8 = 128*a8+128;
 image_a8 = reshape(a8,256,256);
 
-[a9,d9] = deltamodulation(data1);
-[a10,d10] = deltamodulation(data2);
+[a9] = adm_encoder(data1,2);
+a9 = adm_decoder(a9,2);
+[a10] = adm_encoder(data2,2);
+a10 = adm_decoder(a10,2);
 
 figure(1)
 plot(data1)
