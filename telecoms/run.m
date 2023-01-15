@@ -37,8 +37,10 @@ image_a8 = reshape(a8,256,256);
 
 [a9] = adm_encoder(data1,2);
 a9 = adm_decoder(a9,2);
+d9 = sqnr(data1,a9);
 [a10] = adm_encoder(data2,2);
 a10 = adm_decoder(a10,2);
+d10 = sqnr(data2,a10);
 
 figure(1)
 plot(data1)
@@ -71,4 +73,44 @@ plot(a9)
 figure(13)
 plot(a10)
 
+figure(14)
+plot(d1)
 
+figure(15)
+plot(d4)
+
+figure(16)
+plot(d7)
+
+M=4;
+encoding = "normal";
+i=0;
+ber1 = zeros(10,1);
+ser1 = zeros(10,1);
+
+for snr = 0:2:20 
+    i=i+1;
+    [ber1(i),ser1(i)] = mpam(M,snr,encoding);
+end
+
+M=8;
+encoding = "gray";
+i=0;
+ber2 = zeros(10,1);
+ser2 = zeros(10,1);
+
+for snr = 0:2:20 
+    i=i+1;
+    [ber2(i),ser2(i)] = mpam(M,snr,encoding);
+end
+
+ M=8;
+encoding = "normal";
+i=0;
+ber3 = zeros(10,1);
+ser3 = zeros(10,1);
+
+for snr = 0:2:20 
+    i=i+1;
+    [ber3(i),ser3(i)] = mpam(M,snr,encoding);
+end
