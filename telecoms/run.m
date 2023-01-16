@@ -93,7 +93,7 @@ for snr = 0:2:20
     [ber1(i),ser1(i)] = mpam(M,snr,encoding);
 end
 
-M=8;
+M=4;
 encoding = "gray";
 i=0;
 ber2 = zeros(10,1);
@@ -104,8 +104,8 @@ for snr = 0:2:20
     [ber2(i),ser2(i)] = mpam(M,snr,encoding);
 end
 
- M=8;
-encoding = "normal";
+M=8;
+encoding = "gray";
 i=0;
 ber3 = zeros(10,1);
 ser3 = zeros(10,1);
@@ -113,4 +113,15 @@ ser3 = zeros(10,1);
 for snr = 0:2:20 
     i=i+1;
     [ber3(i),ser3(i)] = mpam(M,snr,encoding);
+end
+
+ M=8;
+encoding = "normal";
+i=0;
+ber4 = zeros(10,1);
+ser4 = zeros(10,1);
+
+for snr = 0:2:20 
+    i=i+1;
+    [ber4(i),ser4(i)] = mpam(M,snr,encoding);
 end
